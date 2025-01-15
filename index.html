@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Story</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: pink;
+            color: black;
+            transition: background 0.5s, color 0.5s;
+            background-size: cover;
+            background-position: center;
+        }
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5); /* Slight overlay for readability */
+            padding: 20px;
+            border-radius: 10px;
+        }
+        #message, #story, #link-container {
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1 id="message">Welcome,flat girl Rafia!</h1>
+        <h2 id="sorry-text" style="display: none;">Oh! Sorry, your cat is black!</h2>
+        <p id="story" style="display: none;"> I found your video laughing...</p>
+        <div id="link-container" style="display: none;">
+            <a href="https://youtu.be/UZlvGQ_G2es?si=jIJ1k9GpDn3IQLxv" target="_blank" style="color: white; text-decoration: underline;">Watch the Video</a>
+        </div>
+        <button id="next-button" style="display: none;">Next</button>
+        <button id="continue-button" style="display: none;">Continue</button>
+    </div>
+
+    <script>
+        const body = document.body;
+        const message = document.getElementById('message');
+        const sorryText = document.getElementById('sorry-text');
+        const story = document.getElementById('story');
+        const nextButton = document.getElementById('next-button');
+        const continueButton = document.getElementById('continue-button');
+        const linkContainer = document.getElementById('link-container');
+
+        // Image URLs
+        const image1 = "Capture.PNG"; // Replace with your first uploaded image file name
+        const image2 = "Capturee.PNG"; // Replace with your second uploaded image file name
+
+        // Sequence
+        setTimeout(() => {
+            message.style.display = 'none';
+            sorryText.style.display = 'block';
+            body.style.backgroundColor = 'black';
+            body.style.color = 'white'; // Ensure text is white on black background
+        }, 4000);
+
+        setTimeout(() => {
+            sorryText.style.display = 'none';
+            body.style.backgroundImage = `url('${image1}')`;
+            nextButton.style.display = 'inline-block';
+        }, 9000); // Keep "Sorry" text for 5 seconds (4000ms + 5000ms)
+
+        nextButton.addEventListener('click', () => {
+            body.style.backgroundImage = `url('${image2}')`;
+            story.style.display = 'block';
+            nextButton.style.display = 'none';
+            continueButton.style.display = 'inline-block';
+        });
+
+        continueButton.addEventListener('click', () => {
+            story.style.display = 'none';
+            continueButton.style.display = 'none';
+            linkContainer.style.display = 'block';
+
+            setTimeout(() => {
+                window.location.href = 'https://youtu.be/UZlvGQ_G2es?si=jIJ1k9GpDn3IQLxv';
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
